@@ -58,7 +58,7 @@ public class Flower : MonoBehaviour,IWater
         while (true)
         {
             yield return new WaitForSeconds(decayRate);
-            Debug.Log("Decay");
+
             float amount = decayStrength;
             if (IsBurning)
             {
