@@ -1,7 +1,7 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 
-public class Flower : MonoBehaviour
+public class Flower : MonoBehaviour,WaterInterface
 {
     [Header("Health Settings")]
     [SerializeField] private int maxHealth;
@@ -117,5 +117,10 @@ public class Flower : MonoBehaviour
             nourishParticles.Play();   
         }
         // TODO: Display Nourish Text(?)
+    }
+
+    public void Water()
+    {
+        WaterPlant();
     }
 }

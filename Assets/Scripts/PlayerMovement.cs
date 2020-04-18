@@ -9,8 +9,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D RBody;
     [SerializeField]
     float Speed;
-
-
+    [SerializeField]
+    float WateringTime;
+    float WaterTimer;
     Vector2 MoveDirection;
     // Start is called before the first frame update
     private void Start()
@@ -21,7 +22,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RBody.velocity = MoveDirection* Speed;
+        if (WaterTimer > Time.time)
+        { RBody.velocity = Vector2.zero; }
+        else
+        { RBody.velocity = MoveDirection * Speed; }
     }
 
     public void GetMovementInput(InputAction.CallbackContext context)
@@ -29,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
         MoveDirection = context.ReadValue<Vector2>();
     }
 
-
+    public void OnWater(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+         WaterTimer = Time.time + WateringTime;
+    }
 
 }
