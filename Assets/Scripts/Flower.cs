@@ -43,8 +43,8 @@ public class Flower : MonoBehaviour,WaterInterface
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            WaterPlant();
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    WaterPlant();
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
             SetOnFire();

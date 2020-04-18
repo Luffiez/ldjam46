@@ -6,17 +6,22 @@ using UnityEngine.Events;
 
 public class WaterCan : MonoBehaviour
 { 
-    Vector2 ShootDir;
+    Vector2 ShootDirection;
+    [Tooltip("How the size of the radius when watering")]
     [SerializeField]
     float WaterRadius = 1.2f;
+    [Tooltip("The maximum ammo the watercan can have, also refils to this value")]
     [SerializeField]
     int MaxAmmo;
     int Ammo = 10;
+    [Tooltip("The time it takes to water")]
     [SerializeField]
     float WateringTime = 0.5f;
     float WaterTimer =0.0f;
+    [Tooltip("The layers that the watercan can water")]
     [SerializeField]
     LayerMask WateringLayer;
+    [Tooltip("The layers that the watercan can get water from")]
     [SerializeField]
     LayerMask RefilLayer;
     [SerializeField]
@@ -26,7 +31,7 @@ public class WaterCan : MonoBehaviour
         Vector2 tmpVec = context.ReadValue<Vector2>();
         if (tmpVec == Vector2.zero)
             return;
-        ShootDir = tmpVec;
+        ShootDirection = tmpVec;
     }
 
     public void OnWater(InputAction.CallbackContext context )
@@ -38,7 +43,7 @@ public class WaterCan : MonoBehaviour
         WaterTimer = Time.time + WateringTime;
         Debug.Log("watering" + context.phase);
         
-        Vector2 WaterPosition = (Vector2)transform.position + ShootDir;
+        Vector2 WaterPosition = (Vector2)transform.position + ShootDirection;
         WaterPrefab.transform.position = WaterPosition;
         Collider2D hit2D = Physics2D.OverlapCircle(WaterPosition, WaterRadius,RefilLayer);
         if (hit2D != null)
@@ -51,7 +56,7 @@ public class WaterCan : MonoBehaviour
         Collider2D [] hits2D = Physics2D.OverlapCircleAll(WaterPosition, WaterRadius,WateringLayer);
         if (hits2D.Length > 0)
         {
-            for (int i = 0; 0 < hits2D.Length; i++)
+            for (int i = 0; i < hits2D.Length; i++)
             {
                 WaterInterface iWater = hits2D[i].GetComponent<WaterInterface>();
                 if (iWater != null)

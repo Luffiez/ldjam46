@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1922317116433197094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d939a91a8fc9b4645952198ee956543b, type: 3}
+  m_Script: {fileID: 11500000, guid: 54fbe55386972e54187f38219811bd09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
@@ -54,7 +54,7 @@ MonoBehaviour:
   nourishGain: 5
   nourishParticles: {fileID: 1922317118014534214}
   fireParticles: {fileID: 1922317117865104349}
-  decayMultiplier: 2
+  decayMultiplier: 3
 --- !u!1 &1922317116512286979
 GameObject:
   m_ObjectHideFlags: 0
