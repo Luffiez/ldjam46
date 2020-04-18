@@ -13,16 +13,18 @@ public class Flower : MonoBehaviour
     [SerializeField] private float decayRate = 1f;
     [Tooltip("The strenght of each dacay tick.")]
     [SerializeField] private float decayStrength = 1f;
-    [Tooltip("The multiplier for decay strenght when on fire.")]
-    [SerializeField] private float decayMultiplier = 3f;
+  
 
     [Header("Nourish Settings")]
     [Tooltip("The amount gained when watered by player.")]
     [SerializeField] private int nourishGain = 5;
-    [SerializeField] private ParticleSystem nourishPs;
-    
+    [SerializeField] private ParticleSystem nourishParticles;
 
+    [Header("Burn Settings")]
     private bool isBurning = false;
+    [SerializeField] private ParticleSystem fireParticles;
+    [Tooltip("The multiplier for decay strenght when on fire.")]
+    [SerializeField] private float decayMultiplier = 3f;
 
     public float CurrentHealth 
     {   get { return currentHealth; }  
@@ -42,7 +44,10 @@ public class Flower : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            Nourish();
+            WaterPlant();
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+            SetOnFire();
     }
 
     private void Decay()
@@ -86,7 +91,7 @@ public class Flower : MonoBehaviour
     public void SetOnFire()
     {
         isBurning = true;
-
+        fireParticles.Play();
         // TODO: Add Particles for setting flower on fire?
 
     }
@@ -94,11 +99,11 @@ public class Flower : MonoBehaviour
     private void ExtinguishFire()
     {
         isBurning = false;
-
+        fireParticles.Stop();
         // TODO: Add Particles for stopping the fire?
     }
 
-    public void Nourish()
+    public void WaterPlant()
     {
         if(isBurning)
         {
@@ -109,7 +114,7 @@ public class Flower : MonoBehaviour
         if(CurrentHealth >= maxHealth)
         {
             CurrentHealth = maxHealth;
-            nourishPs.Play();   
+            nourishParticles.Play();   
         }
         // TODO: Display Nourish Text(?)
     }
