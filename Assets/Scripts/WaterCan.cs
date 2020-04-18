@@ -58,7 +58,7 @@ public class WaterCan : MonoBehaviour
         {
             for (int i = 0; i < hits2D.Length; i++)
             {
-                WaterInterface iWater = hits2D[i].GetComponent<WaterInterface>();
+                IWater iWater = hits2D[i].GetComponent<IWater>();
                 if (iWater != null)
                     iWater.Water();
             }

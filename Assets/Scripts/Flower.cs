@@ -1,7 +1,8 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
 
-public class Flower : MonoBehaviour,WaterInterface
+public class Flower : MonoBehaviour,IWater
 {
     [Header("Health Settings")]
     [SerializeField] private int maxHealth;
@@ -35,45 +36,52 @@ public class Flower : MonoBehaviour,WaterInterface
         }  
     }
 
+    public bool IsBurning { get => isBurning; private set => isBurning = value; }
+
     void Start()
     {
         CurrentHealth = maxHealth;
-        InvokeRepeating("Decay", 0, decayMultiplier);
+        StartCoroutine(Decay());
     }
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //    WaterPlant();
+        if (Input.GetKeyDown(KeyCode.Space))
+            Water();
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
             SetOnFire();
     }
 
-    private void Decay()
+    private IEnumerator Decay()
     {
-        float amount = decayStrength;
-        if (isBurning)
+        while (true)
         {
-            amount *= decayMultiplier;
-        }
+            yield return new WaitForSeconds(decayRate);
+            Debug.Log("Decay");
+            float amount = decayStrength;
+            if (IsBurning)
+            {
+                amount *= decayMultiplier;
+            }
 
-        CurrentHealth -= amount;
+            CurrentHealth -= amount;
 
-        if(CurrentHealth <= 0)
-        {
-            currentHealth = 0;
-            Die();
-        }
-        else
-        {
-            // TODO: Display Decay Effect/Text
+            if (CurrentHealth <= 0)
+            {
+                currentHealth = 0;
+                Die();
+            }
+            else
+            {
+                // TODO: Display Decay Effect/Text
+            }
         }
     }
 
     void Die()
     {
-        if (isBurning)
+        if (IsBurning)
         {
             Debug.Log($"Game Over. {gameObject.name} was set ablaze!");
         }
@@ -90,7 +98,7 @@ public class Flower : MonoBehaviour,WaterInterface
 
     public void SetOnFire()
     {
-        isBurning = true;
+        IsBurning = true;
         fireParticles.Play();
         // TODO: Add Particles for setting flower on fire?
 
@@ -98,29 +106,26 @@ public class Flower : MonoBehaviour,WaterInterface
 
     private void ExtinguishFire()
     {
-        isBurning = false;
+        IsBurning = false;
         fireParticles.Stop();
         // TODO: Add Particles for stopping the fire?
     }
 
-    public void WaterPlant()
-    {
-        if(isBurning)
-        {
-            ExtinguishFire();
-        }
-
-        CurrentHealth += nourishGain;
-        if(CurrentHealth >= maxHealth)
-        {
-            CurrentHealth = maxHealth;
-            nourishParticles.Play();   
-        }
-        // TODO: Display Nourish Text(?)
-    }
-
     public void Water()
     {
-        WaterPlant();
+        float curGain = nourishGain;
+        if (IsBurning)
+        {
+            ExtinguishFire();
+            curGain /= 2;
+        }
+
+        CurrentHealth += curGain;
+        if (CurrentHealth >= maxHealth)
+        {
+            CurrentHealth = maxHealth;
+            nourishParticles.Play();
+        }
+        // TODO: Display Nourish Text(?)
     }
 }

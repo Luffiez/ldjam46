@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface WaterInterface 
+public interface IWater 
 {
     void Water();
 }
