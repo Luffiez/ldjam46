@@ -34,11 +34,10 @@ public class Fire : MonoBehaviour, IWater
         // TODO: Implement flower manager instead and get flower list from there!
         Flower[] targets = FindObjectsOfType<Flower>();
         Flower closestTarget = currentTarget;
-       
+        lastDist = 1000000f;
         foreach (Flower flower in targets)
         {
-            if (closestTarget && flower.IsBurning && targets.Length > 1 ||
-                currentTarget == flower)
+            if (closestTarget && flower.IsBurning && targets.Length > 1 )
             {
                 continue;
             }
