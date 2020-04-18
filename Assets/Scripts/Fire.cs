@@ -40,11 +40,12 @@ public class Fire : MonoBehaviour, IWater
         {
             if (targets.Length > 1 && flower.IsBurning && currentTarget)
                 continue;
-
+            Debug.LogWarning("Start to set");
             Path path;
 
             if (currentTarget == null)
             {
+                Debug.LogWarning("set first target");
                 currentTarget = flower;
                 path = seeker.StartPath(transform.position, flower.transform.position);
                 closestLenght = path.path.Count;
@@ -52,8 +53,9 @@ public class Fire : MonoBehaviour, IWater
             }
 
             path = seeker.StartPath(transform.position, flower.transform.position);
-            if(closestLenght < path.path.Count)
+            if(closestLenght < path.path.Count || currentTarget.IsBurning)
             {
+                Debug.LogWarning("reseting target");
                 currentTarget = flower;
                 closestLenght = path.path.Count;
             }
@@ -65,8 +67,8 @@ public class Fire : MonoBehaviour, IWater
     private void FixedUpdate()
     {
         if (!currentTarget)
-            return; 
-
+            return;
+        Debug.Log(Vector2.Distance(transform.position, currentTarget.transform.position));
         if(Vector2.Distance(transform.position, currentTarget.transform.position) <= 0.25f)
         {
             currentTarget.SetOnFire();
