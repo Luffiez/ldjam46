@@ -1,6 +1,5 @@
 ﻿using Pathfinding;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fire : MonoBehaviour, IWater
@@ -8,58 +7,70 @@ public class Fire : MonoBehaviour, IWater
     Seeker seeker;
     AIDestinationSetter setter;
     Flower currentTarget = null;
+    
+    float curDist= 0;
+    float lastDist = 0;
 
     void Start()
     {
         seeker = GetComponent<Seeker>();
         setter = GetComponent<AIDestinationSetter>();
 
-        FindClosestTarget();
-        StartCoroutine(CheckIfTargetIsBurning());
+        StartCoroutine(CheckTargetStatus());
     }
 
-    IEnumerator CheckIfTargetIsBurning()
+    IEnumerator CheckTargetStatus()
     {
         while (true)
         {
-            if (currentTarget != null && currentTarget.IsBurning)
-                FindClosestTarget();
+            yield return new WaitForSeconds(0.5f);
 
-            yield return new WaitForSeconds(0.1f);
+            StartCoroutine(SetTarget());
         }
     }
 
-    void FindClosestTarget()
+    private IEnumerator SetTarget()
     {
         // TODO: Implement flower manager instead and get flower list from there!
         Flower[] targets = FindObjectsOfType<Flower>();
-
-        int closestLenght = 0;
-
+        Flower closestTarget = currentTarget;
+       
         foreach (Flower flower in targets)
         {
-            if (targets.Length > 1 && flower.IsBurning && currentTarget)
+            if (closestTarget && flower.IsBurning && targets.Length > 1 ||
+                currentTarget == flower)
+            {
                 continue;
+            }
 
             Path path;
+            path = seeker.StartPath(transform.position, flower.transform.position, OnPathCalculated);
 
-            if (currentTarget == null)
-            {
-                currentTarget = flower;
-                path = seeker.StartPath(transform.position, flower.transform.position);
-                closestLenght = path.path.Count;
-                continue;
-            }
+            yield return StartCoroutine(path.WaitForPath());
 
-            path = seeker.StartPath(transform.position, flower.transform.position);
-            if(closestLenght < path.path.Count)
-            {
-                currentTarget = flower;
-                closestLenght = path.path.Count;
+            Debug.Log(flower.name + " : " + curDist);
+
+            if (closestTarget == null)
+            {               
+                closestTarget = flower;
             }
+            else if((lastDist > curDist) || 
+                (currentTarget && currentTarget.IsBurning))
+            {
+                Debug.Log("New target!: " + flower.name);
+                lastDist = curDist;
+                closestTarget = flower;
+            }
+            //Debug.Log("Target: " + closestTarget.name + " - Length: " + closestLenght);
         }
-
+      
+        currentTarget = closestTarget;
         setter.target = currentTarget.transform;
+    }
+
+    private void OnPathCalculated(Path path)
+    {
+        curDist = path.GetTotalLength();
     }
 
     private void FixedUpdate()
@@ -71,7 +82,7 @@ public class Fire : MonoBehaviour, IWater
         {
             currentTarget.SetOnFire();
 
-            // TODO: Add Effect for fire death
+            // TODO: Add Effect for fire spread
             Destroy(gameObject);
         }
     }
