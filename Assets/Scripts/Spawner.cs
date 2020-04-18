@@ -57,6 +57,8 @@ public class Spawner : MonoBehaviour
                     break;
                 }
             }
+            if (spawnPosition == Vector3.zero)
+                return null;
         }
         else
         {

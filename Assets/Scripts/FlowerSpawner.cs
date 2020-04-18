@@ -14,6 +14,7 @@ public class FlowerSpawner :  Spawner
     public override GameObject Spawn()
     {
        GameObject spawnObject =  base.Spawn();
+        if(spawnObject != null)
         flowerList.Add(spawnObject.GetComponent<Flower>());
         return spawnObject;
     }
