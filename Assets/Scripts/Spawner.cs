@@ -31,7 +31,6 @@ public class Spawner : MonoBehaviour
     GameObject PrefabObject;
     [SerializeField]
     Transform[] SpawnTransform;
-    // Start is called before the first frame update
     SpawnPoint[] SpawnPoints;
     void Awake()
     {
