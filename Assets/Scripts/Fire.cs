@@ -9,7 +9,7 @@ public class Fire : MonoBehaviour, IWater
     Flower currentTarget = null;
     
     float curDist= 0;
-    float lastDist = 0;
+    float lastDist = 10000;
 
     void Start()
     {
@@ -24,8 +24,8 @@ public class Fire : MonoBehaviour, IWater
         while (true)
         {
             yield return new WaitForSeconds(0.5f);
-
-            StartCoroutine(SetTarget());
+            if(currentTarget == null || currentTarget.IsBurning)
+                StartCoroutine(SetTarget());
         }
     }
 
