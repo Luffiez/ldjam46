@@ -26,7 +26,7 @@ public class Flower : MonoBehaviour
 
     private void Decay()
     {
-        float amount = 
+        //float amount = 
         if (isBurning)
         {
 
