@@ -11,7 +11,9 @@ public class WaterCan : MonoBehaviour
     [SerializeField]
     int MaxAmmo;
     int Ammo = 10;
-    float waterTime = 0.0f;
+    [SerializeField]
+    float WateringTime = 0.5f;
+    float WaterTimer =0.0f;
     [SerializeField]
     LayerMask WateringLayer;
     [SerializeField]
@@ -29,16 +31,18 @@ public class WaterCan : MonoBehaviour
     public void OnWater(InputAction.CallbackContext context )
     {
         
-        if (Ammo <= 0 || context.phase == InputActionPhase.Canceled || context.phase == InputActionPhase.Started)
+        if (Ammo <= 0 || context.phase == InputActionPhase.Canceled || context.phase == InputActionPhase.Started || WaterTimer > Time.time)
             return;
         Ammo--;
+        WaterTimer = Time.time + WateringTime;
         Debug.Log("watering" + context.phase);
 
         Vector2 WaterPosition = (Vector2)transform.position + ShootDir;
         WaterPrefab.transform.position = WaterPosition;
-        Collider2D hit2D = Physics2D.OverlapCircle(WaterPosition, WaterRadius, RefilLayer);
+        Collider2D hit2D = Physics2D.OverlapCircle(WaterPosition, WaterRadius,RefilLayer);
         if (hit2D != null)
         {
+            Debug.Log("Refil");
             Ammo = MaxAmmo;
             return;
         }
