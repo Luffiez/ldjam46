@@ -25,7 +25,14 @@ public class WaterCan : MonoBehaviour
     [SerializeField]
     LayerMask RefilLayer;
     [SerializeField]
-    GameObject WaterPrefab;
+    GameObject WaterParticlePrefab;
+    ParticleSystem WaterParticle;
+
+    private void Start()
+    {
+        WaterParticle = WaterParticlePrefab.GetComponent<ParticleSystem>();
+    }
+
     public void GetShotDir(InputAction.CallbackContext context)
     {
         Vector2 tmpVec = context.ReadValue<Vector2>();
@@ -50,7 +57,8 @@ public class WaterCan : MonoBehaviour
         if (Ammo <= 0)
             return;
         Ammo--;
-        WaterPrefab.transform.position = WaterPosition;
+        WaterParticlePrefab.transform.position = WaterPosition;
+        WaterParticle.Play();
         Debug.Log("ammo " + Ammo);
         WaterTimer = Time.time + WateringTime;
         Debug.Log("watering" + context.phase);
