@@ -140,16 +140,12 @@ public class Flower : MonoBehaviour, IWater
         IsBurning = true;
         fireParticles.Play();
         AuSource.PlayOneShot(Ignite);
-        
-        // TODO: Add Particles for setting flower on fire?
-
-    }
+            }
 
     private void ExtinguishFire()
     {
         IsBurning = false;
         fireParticles.Stop();
-        // TODO: Add Particles for stopping the fire?
     }
 
     public void Water()
@@ -169,6 +165,5 @@ public class Flower : MonoBehaviour, IWater
             CurrentHealth = maxHealth;
             nourishParticles.Play();
         }
-        // TODO: Display Nourish Text(?)
     }
 }

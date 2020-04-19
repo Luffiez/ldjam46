@@ -103,6 +103,5 @@ public class PlayerMovement : MonoBehaviour
             wateringCanSprite.sortingOrder = 3;
         else
             wateringCanSprite.sortingOrder = 5;
-
     }
 }
