@@ -27,10 +27,12 @@ public class WaterCan : MonoBehaviour
     [SerializeField]
     GameObject WaterParticlePrefab;
     ParticleSystem WaterParticle;
+    bool GameOver = false;
 
     private void Start()
     {
         WaterParticle = WaterParticlePrefab.GetComponent<ParticleSystem>();
+        GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
 
     public void GetShotDir(InputAction.CallbackContext context)
@@ -44,7 +46,7 @@ public class WaterCan : MonoBehaviour
     public void OnWater(InputAction.CallbackContext context )
     {
         
-        if ( context.phase == InputActionPhase.Canceled || context.phase == InputActionPhase.Started || WaterTimer > Time.time)
+        if ( context.phase == InputActionPhase.Canceled || context.phase == InputActionPhase.Started || WaterTimer > Time.time||GameOver)
             return;
         Vector2 WaterPosition = (Vector2)transform.position + ShootDirection;
         Collider2D hit2D = Physics2D.OverlapCircle(WaterPosition, WaterRadius, RefilLayer);
@@ -59,12 +61,7 @@ public class WaterCan : MonoBehaviour
         Ammo--;
         WaterParticlePrefab.transform.position = WaterPosition;
         WaterParticle.Play();
-        Debug.Log("ammo " + Ammo);
         WaterTimer = Time.time + WateringTime;
-        Debug.Log("watering" + context.phase);
-        
-   
-        
         Collider2D [] hits2D = Physics2D.OverlapCircleAll(WaterPosition, WaterRadius,WateringLayer);
         if (hits2D.Length > 0)
         {
@@ -76,4 +73,20 @@ public class WaterCan : MonoBehaviour
             }
         }
     }
+
+    void OnGameOver()
+    {
+        GameOver = true;
+    }
+
+    private void OnEnable()
+    {
+        GameHandler.Instance.GameOver.AddListener(OnGameOver);
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.Instance.GameOver.RemoveListener(OnGameOver);
+    }
+
 }

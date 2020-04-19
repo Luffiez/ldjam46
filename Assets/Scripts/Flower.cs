@@ -75,6 +75,7 @@ public class Flower : MonoBehaviour,IWater
             else
             {
                 // TODO: Display Decay Effect/Text
+                GameHandler.Instance.AddScore((int)currentHealth);
             }
         }
     }
@@ -89,6 +90,7 @@ public class Flower : MonoBehaviour,IWater
         {
             Debug.Log($"Game Over. {gameObject.name} just wanted a sip of water!");
         }
+        GameHandler.Instance.StartGameOver();
     }
 
     private void UpdateHealthBar()

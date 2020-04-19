@@ -19,8 +19,9 @@ public class GameHandler : MonoBehaviour
     float EnemySpawnTimer;
     [SerializeField]   
     Spawner EnemySpawner;
-    static GameHandler Instance;
-    UnityEvent GameOver;
+    public static GameHandler Instance;
+    public UnityEvent GameOver;
+    bool IsGameOver = false;
     [Header("UI")]
     [SerializeField]
     TextMeshProUGUI GameOverText;
@@ -47,6 +48,8 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
+        if (IsGameOver)
+            return;
         if (FlowerSpawnTimer < Time.time)
         {
             FlowerSpawner.Spawn();
@@ -59,16 +62,21 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    void AddScore(int _points)
+    public void AddScore(int _points)
     {
+        if (IsGameOver)
+            return;
         Score += _points;
         ScoreText.text = "Score:" + Score;
     }
 
-    void StartGameOver()
+    public void StartGameOver()
     {
+        if (IsGameOver)
+            return;
         GameOverText.text = "Game Over";
         GameOver.Invoke();
+        IsGameOver = true;
     }
 
 }
