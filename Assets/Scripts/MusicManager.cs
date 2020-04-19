@@ -52,6 +52,12 @@ public class MusicManager : MonoBehaviour
     {
         ASource.Stop();
     }
+
+
+    public void PlayOneShot(AudioClip clip, float volume)
+    {
+        ASource.PlayOneShot(clip, volume);
+    }
     // Start is called before the first frame update
 
 }
