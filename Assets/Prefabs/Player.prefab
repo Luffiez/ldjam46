@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 24944349}
   - component: {fileID: 24944350}
+  - component: {fileID: 1046654087888566458}
   m_Layer: 10
   m_Name: Player Sprite
   m_TagString: Untagged
@@ -81,6 +82,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1046654087888566458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24944348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d56f286c267a2458aabd11ad3eb236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortingBaseValue: 5000
+  OriginOffsetY: 8
+  RunOnce: 0
 --- !u!1 &367890544
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 386991844}
   - component: {fileID: 386991845}
+  - component: {fileID: 3739850160590878900}
   m_Layer: 10
   m_Name: Watering Can
   m_TagString: Untagged
@@ -243,6 +260,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3739850160590878900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386991843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d56f286c267a2458aabd11ad3eb236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortingBaseValue: 5000
+  OriginOffsetY: 9
+  RunOnce: 0
 --- !u!1 &6027378752978298832
 GameObject:
   m_ObjectHideFlags: 0
@@ -5037,7 +5069,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7305527470092066477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1491144, y: 1.7424207, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9210405281340577059}
