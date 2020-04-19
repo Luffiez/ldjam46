@@ -5109,7 +5109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SortingBaseValue: 5000
-  OriginOffsetY: 7
+  OriginOffsetY: 9
   RunOnce: 0
 --- !u!1 &8035368126739421299
 GameObject:
