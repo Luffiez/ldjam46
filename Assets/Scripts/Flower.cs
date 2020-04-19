@@ -27,12 +27,21 @@ public class Flower : MonoBehaviour,IWater
     [Tooltip("The multiplier for decay strenght when on fire.")]
     [SerializeField] private float decayMultiplier = 3f;
 
+    [Header("Flower Sprites")]
+    public SpriteRenderer spriteRenderer;
+    public Sprite healthySprite;
+    public Sprite damagedSprite;
+    public Sprite dyingSprite;
+    public Sprite deadSprite;
+
+
     public float CurrentHealth 
     {   get { return currentHealth; }  
         set 
         {
             currentHealth = value;
             UpdateHealthBar();
+            UpdateFlowerSprite();
         }  
     }
 
@@ -95,7 +104,30 @@ public class Flower : MonoBehaviour,IWater
 
     private void UpdateHealthBar()
     {
-        healthImage.fillAmount = CurrentHealth / maxHealth;
+        float percentage = CurrentHealth / maxHealth;
+
+        healthImage.fillAmount = percentage;
+    }
+
+    void UpdateFlowerSprite()
+    {
+        float percentage = CurrentHealth / maxHealth;
+        Sprite newState = healthySprite;
+
+        if (percentage <= 0f)
+        {
+            newState = deadSprite;
+        }
+        else if (percentage <= 0.3f)
+        {
+            newState = dyingSprite;
+        }
+        else if (percentage <= 0.6f)
+        {
+            newState = damagedSprite;
+        }
+
+        spriteRenderer.sprite = newState;
     }
 
     public void SetOnFire()

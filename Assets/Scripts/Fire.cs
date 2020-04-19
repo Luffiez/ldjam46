@@ -9,7 +9,7 @@ public class Fire : MonoBehaviour, IWater
     Flower currentTarget = null;
     
     float curDist= 0;
-    float lastDist = 0;
+    float lastDist = 10000;
 
     void Start()
     {
@@ -24,8 +24,8 @@ public class Fire : MonoBehaviour, IWater
         while (true)
         {
             yield return new WaitForSeconds(0.5f);
-
-            StartCoroutine(SetTarget());
+            if(currentTarget == null || currentTarget.IsBurning)
+                StartCoroutine(SetTarget());
         }
     }
 
@@ -34,7 +34,8 @@ public class Fire : MonoBehaviour, IWater
         // TODO: Implement flower manager instead and get flower list from there!
         Flower[] targets = FindObjectsOfType<Flower>();
         Flower closestTarget = currentTarget;
-        lastDist = 1000000f;
+        lastDist = 10000;
+
         foreach (Flower flower in targets)
         {
             if (closestTarget && flower.IsBurning && targets.Length > 1 )
@@ -53,7 +54,7 @@ public class Fire : MonoBehaviour, IWater
             {               
                 closestTarget = flower;
             }
-            else if((lastDist > curDist) || 
+            else if((lastDist >= curDist) || 
                 (currentTarget && currentTarget.IsBurning))
             {
                 Debug.Log("New target!: " + flower.name);
