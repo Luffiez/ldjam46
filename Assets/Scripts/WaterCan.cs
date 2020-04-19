@@ -31,6 +31,7 @@ public class WaterCan : MonoBehaviour
 
     private void Start()
     {
+        GameHandler.Instance.SetAmmoText(Ammo);
         WaterParticle = WaterParticlePrefab.GetComponent<ParticleSystem>();
         GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
@@ -54,11 +55,13 @@ public class WaterCan : MonoBehaviour
         {
             Debug.Log("Refil");
             Ammo = MaxAmmo;
+            GameHandler.Instance.SetAmmoText(Ammo);
             return;
         }
         if (Ammo <= 0)
             return;
         Ammo--;
+        GameHandler.Instance.SetAmmoText(Ammo);
         WaterParticlePrefab.transform.position = WaterPosition;
         WaterParticle.Play();
         WaterTimer = Time.time + WateringTime;
@@ -81,6 +84,7 @@ public class WaterCan : MonoBehaviour
 
     private void OnEnable()
     {
+        if(GameHandler.Instance != null)
         GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
 

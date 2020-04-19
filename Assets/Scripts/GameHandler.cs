@@ -28,7 +28,8 @@ public class GameHandler : MonoBehaviour
     int Score = 0;
     [SerializeField]
     TextMeshProUGUI ScoreText;
-
+    [SerializeField]
+    TextMeshProUGUI AmmoText;
 
 
 
@@ -77,6 +78,18 @@ public class GameHandler : MonoBehaviour
         GameOverText.text = "Game Over";
         GameOver.Invoke();
         IsGameOver = true;
+    }
+
+    public void SetAmmoText(int _ammo)
+    {
+        if (_ammo > 0)
+        {
+            AmmoText.text = "Ammo:" + _ammo;
+        }
+        else
+        {
+            AmmoText.text = "Refil!";
+        }
     }
 
 }

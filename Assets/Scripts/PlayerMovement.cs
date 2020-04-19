@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        if(GameHandler.Instance != null)
         GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
 
