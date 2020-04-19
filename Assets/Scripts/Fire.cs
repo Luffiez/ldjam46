@@ -11,6 +11,10 @@ public class Fire : MonoBehaviour, IWater
     float curDist= 0;
     float lastDist = 10000;
 
+    public GameObject explosionPrefab;
+    public GameObject smokePrefab;
+
+
     void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -83,7 +87,9 @@ public class Fire : MonoBehaviour, IWater
         {
             currentTarget.SetOnFire();
 
-            // TODO: Add Effect for fire spread
+            GameObject explosion = Instantiate(explosionPrefab, currentTarget.transform.position, Quaternion.identity);
+            Destroy(explosion, 3f);
+
             Destroy(gameObject);
         }
     }
@@ -91,7 +97,9 @@ public class Fire : MonoBehaviour, IWater
     public void Water()
     {
         // Kills the fire
-        // TODO: Add Effect for fire death
+
+        GameObject smoke = Instantiate(smokePrefab, transform.position, Quaternion.identity);
+        Destroy(smoke, 3f);
 
         Destroy(gameObject);
     }
