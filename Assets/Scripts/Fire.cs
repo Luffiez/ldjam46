@@ -42,8 +42,7 @@ public class Fire : MonoBehaviour, IWater
 
         foreach (Flower flower in targets)
         {
-            if (closestTarget && flower.IsBurning && targets.Length > 1 ||
-                currentTarget == flower)
+            if (closestTarget && flower.IsBurning && targets.Length > 1 )
             {
                 continue;
             }
@@ -81,8 +80,7 @@ public class Fire : MonoBehaviour, IWater
     private void FixedUpdate()
     {
         if (!currentTarget)
-            return; 
-
+            return;
         if(Vector2.Distance(transform.position, currentTarget.transform.position) <= 0.25f)
         {
             currentTarget.SetOnFire();

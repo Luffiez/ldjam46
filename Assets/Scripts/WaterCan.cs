@@ -25,7 +25,17 @@ public class WaterCan : MonoBehaviour
     [SerializeField]
     LayerMask RefilLayer;
     [SerializeField]
-    GameObject WaterPrefab;
+    GameObject WaterParticlePrefab;
+    ParticleSystem WaterParticle;
+    bool GameOver = false;
+
+    private void Start()
+    {
+        GameHandler.Instance.SetAmmoText(Ammo);
+        WaterParticle = WaterParticlePrefab.GetComponent<ParticleSystem>();
+        GameHandler.Instance.GameOver.AddListener(OnGameOver);
+    }
+
     public void GetShotDir(InputAction.CallbackContext context)
     {
         Vector2 tmpVec = context.ReadValue<Vector2>();
@@ -37,22 +47,24 @@ public class WaterCan : MonoBehaviour
     public void OnWater(InputAction.CallbackContext context )
     {
         
-        if (Ammo <= 0 || context.phase == InputActionPhase.Canceled || context.phase == InputActionPhase.Started || WaterTimer > Time.time)
+        if ( context.phase == InputActionPhase.Canceled || context.phase == InputActionPhase.Started || WaterTimer > Time.time||GameOver)
             return;
-        Ammo--;
-        WaterTimer = Time.time + WateringTime;
-        Debug.Log("watering" + context.phase);
-        
         Vector2 WaterPosition = (Vector2)transform.position + ShootDirection;
-        WaterPrefab.transform.position = WaterPosition;
-        Collider2D hit2D = Physics2D.OverlapCircle(WaterPosition, WaterRadius,RefilLayer);
+        Collider2D hit2D = Physics2D.OverlapCircle(WaterPosition, WaterRadius, RefilLayer);
         if (hit2D != null)
         {
             Debug.Log("Refil");
             Ammo = MaxAmmo;
+            GameHandler.Instance.SetAmmoText(Ammo);
             return;
         }
-        
+        if (Ammo <= 0)
+            return;
+        Ammo--;
+        GameHandler.Instance.SetAmmoText(Ammo);
+        WaterParticlePrefab.transform.position = WaterPosition;
+        WaterParticle.Play();
+        WaterTimer = Time.time + WateringTime;
         Collider2D [] hits2D = Physics2D.OverlapCircleAll(WaterPosition, WaterRadius,WateringLayer);
         if (hits2D.Length > 0)
         {
@@ -64,4 +76,21 @@ public class WaterCan : MonoBehaviour
             }
         }
     }
+
+    void OnGameOver()
+    {
+        GameOver = true;
+    }
+
+    private void OnEnable()
+    {
+        if(GameHandler.Instance != null)
+        GameHandler.Instance.GameOver.AddListener(OnGameOver);
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.Instance.GameOver.RemoveListener(OnGameOver);
+    }
+
 }

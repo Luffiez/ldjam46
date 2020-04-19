@@ -13,15 +13,19 @@ public class PlayerMovement : MonoBehaviour
     float WateringTime;
     float WaterTimer;
     Vector2 MoveDirection;
+    bool GameOver = false;
     // Start is called before the first frame update
     private void Start()
     {
         RBody = GetComponent<Rigidbody2D>();
+        GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
     // Update is called once per frame
 
     private void FixedUpdate()
     {
+        if (GameOver)
+            return;
         if (WaterTimer > Time.time)
         { RBody.velocity = Vector2.zero; }
         else
@@ -37,6 +41,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Performed)
          WaterTimer = Time.time + WateringTime;
+    }
+
+    void OnGameOver()
+    {
+        GameOver = true;
+        RBody.velocity = Vector2.zero;
+    }
+
+    private void OnEnable()
+    {
+        if(GameHandler.Instance != null)
+        GameHandler.Instance.GameOver.AddListener(OnGameOver);
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.Instance.GameOver.RemoveListener(OnGameOver);
     }
 
 }
