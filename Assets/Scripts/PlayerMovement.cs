@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if(RBody.velocity.y > 0 && !isFacingUp ||
                 RBody.velocity.y < 0 && isFacingUp ||
-                RBody.velocity.x != 0 && isFacingUp)
+                RBody.velocity.x != 0 && RBody.velocity.y < 0 && isFacingUp)
             {
                 FlipY();
             }
