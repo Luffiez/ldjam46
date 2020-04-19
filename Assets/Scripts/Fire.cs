@@ -76,7 +76,6 @@ public class Fire : MonoBehaviour, IWater
     {
         if (!currentTarget)
             return;
-        Debug.Log(Vector2.Distance(transform.position, currentTarget.transform.position));
         if(Vector2.Distance(transform.position, currentTarget.transform.position) <= 0.25f)
         {
             currentTarget.SetOnFire();

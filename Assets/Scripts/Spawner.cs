@@ -32,12 +32,12 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     Transform[] SpawnTransform;
     SpawnPoint[] SpawnPoints;
-    void Awake()
+    private void Start()
     {
-        SpawnPoints = new SpawnPoint[SpawnPoints.Length];
+        SpawnPoints = new SpawnPoint[SpawnTransform.Length];
         for (int i = 0; i < SpawnTransform.Length; i++)
         {
-            SpawnPoints[i] = new SpawnPoint(SpawnTransform[i].position,false);
+            SpawnPoints[i] = new SpawnPoint(SpawnTransform[i].position, false);
         }
     }
 

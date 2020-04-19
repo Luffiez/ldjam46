@@ -2,22 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class GameHandler : MonoBehaviour
 {
-    int Score = 0;
-    UnityEvent GameOver;
+   
     [Header("Flower Settings")]
     [SerializeField]
     float FlowerSpawnTime;
     float FlowerSpawnTimer;
+    [SerializeField]
     Spawner FlowerSpawner;
     [Header("Enemy settings")]
     [SerializeField]
     float EnemySpawnTime;
     float EnemySpawnTimer;
+    [SerializeField]   
     Spawner EnemySpawner;
     static GameHandler Instance;
+    UnityEvent GameOver;
+    [Header("UI")]
+    [SerializeField]
+    TextMeshProUGUI GameOverText;
+    int Score = 0;
+    [SerializeField]
+    TextMeshProUGUI ScoreText;
 
 
 
@@ -33,6 +42,7 @@ public class GameHandler : MonoBehaviour
     {
         FlowerSpawnTimer = Time.time + FlowerSpawnTime;
         EnemySpawnTimer = Time.time + EnemySpawnTimer;
+        GameOverText.text = "";
     }
 
     private void Update()
@@ -52,10 +62,12 @@ public class GameHandler : MonoBehaviour
     void AddScore(int _points)
     {
         Score += _points;
+        ScoreText.text = "Score:" + Score;
     }
 
     void StartGameOver()
     {
+        GameOverText.text = "Game Over";
         GameOver.Invoke();
     }
 
