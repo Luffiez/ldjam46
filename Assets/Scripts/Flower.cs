@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Flower : MonoBehaviour,IWater
+public class Flower : MonoBehaviour, IWater
 {
     [Header("Health Settings")]
     [SerializeField] private int maxHealth;
@@ -14,7 +14,7 @@ public class Flower : MonoBehaviour,IWater
     [SerializeField] private float decayRate = 1f;
     [Tooltip("The strenght of each dacay tick.")]
     [SerializeField] private float decayStrength = 1f;
-  
+
 
     [Header("Nourish Settings")]
     [Tooltip("The amount gained when watered by player.")]
@@ -34,6 +34,14 @@ public class Flower : MonoBehaviour,IWater
     public Sprite dyingSprite;
     public Sprite deadSprite;
 
+    [Header("Flower Sound")]
+    [SerializeField]
+    AudioClip Burning;
+    [SerializeField]
+    AudioClip RefreshingSound;
+    [SerializeField]
+    AudioClip Ignite;
+    AudioSource AuSource;
 
     public float CurrentHealth 
     {   get { return currentHealth; }  
@@ -50,6 +58,8 @@ public class Flower : MonoBehaviour,IWater
     void Start()
     {
         CurrentHealth = maxHealth;
+        AuSource = GetComponent<AudioSource>();
+        AuSource.clip = Burning;
         StartCoroutine(Decay());
     }
 
@@ -62,6 +72,10 @@ public class Flower : MonoBehaviour,IWater
             float amount = decayStrength;
             if (IsBurning)
             {
+                if (!AuSource.isPlaying)
+                {
+                    AuSource.Play();
+                }
                 amount *= decayMultiplier;
             }
 
@@ -125,6 +139,8 @@ public class Flower : MonoBehaviour,IWater
     {
         IsBurning = true;
         fireParticles.Play();
+        AuSource.PlayOneShot(Ignite);
+        
         // TODO: Add Particles for setting flower on fire?
 
     }
@@ -144,6 +160,8 @@ public class Flower : MonoBehaviour,IWater
             ExtinguishFire();
             curGain /= 2;
         }
+        AuSource.Stop();
+        AuSource.PlayOneShot(RefreshingSound);
 
         CurrentHealth += curGain;
         if (CurrentHealth >= maxHealth)

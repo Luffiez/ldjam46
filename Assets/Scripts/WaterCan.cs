@@ -28,12 +28,27 @@ public class WaterCan : MonoBehaviour
     GameObject WaterParticlePrefab;
     ParticleSystem WaterParticle;
     bool GameOver = false;
-
+    [Header("Audio")]
+    [SerializeField]
+    AudioClip WateringClip;
+    [SerializeField]
+    AudioClip RefilingClip;
+    [SerializeField]
+    AudioClip EmptyClip;
+    AudioSource ASource;
     private void Start()
     {
+        ASource = GetComponent<AudioSource>();
         GameHandler.Instance.SetAmmoText(Ammo);
         WaterParticle = WaterParticlePrefab.GetComponent<ParticleSystem>();
         GameHandler.Instance.GameOver.AddListener(OnGameOver);
+    }
+
+
+    private void Update()
+    {
+        if (WaterTimer < Time.time)
+            ASource.Stop();
     }
 
     public void GetShotDir(InputAction.CallbackContext context)
@@ -55,12 +70,21 @@ public class WaterCan : MonoBehaviour
         {
             // Debug.Log("Refill");
             Ammo = MaxAmmo;
+            ASource.clip = RefilingClip;
+            ASource.Play();
             GameHandler.Instance.SetAmmoText(Ammo);
+            WaterTimer = Time.time + WateringTime;
             return;
         }
         if (Ammo <= 0)
+        {
+            ASource.PlayOneShot(EmptyClip);
+            WaterTimer = Time.time + 0.5f;
             return;
+        }
         Ammo--;
+        ASource.clip = WateringClip;
+        ASource.Play();
         GameHandler.Instance.SetAmmoText(Ammo);
         WaterParticlePrefab.transform.position = WaterPosition;
         WaterParticle.Play();
