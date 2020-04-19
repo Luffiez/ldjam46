@@ -20,6 +20,7 @@ public class SpriteSorter : MonoBehaviour
 
     private void LateUpdate()
     {
+        Debug.Log(  gameObject + " " + (int)( SortingBaseValue - transform.position.y - OriginOffsetY) + "position:" + transform.position);
         SpriteRenderer.sortingOrder = (int)(SortingBaseValue - transform.position.y - OriginOffsetY);
         if (RunOnce)
             Destroy(this);
