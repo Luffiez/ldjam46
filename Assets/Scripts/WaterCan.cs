@@ -65,7 +65,7 @@ public class WaterCan : MonoBehaviour
         if ( context.phase == InputActionPhase.Canceled || context.phase == InputActionPhase.Started || WaterTimer > Time.time||GameOver)
             return;
         Vector2 WaterPosition = (Vector2)transform.position + ShootDirection;
-        Collider2D hit2D = Physics2D.OverlapCircle(WaterPosition, WaterRadius, RefilLayer);
+        Collider2D hit2D = Physics2D.OverlapCircle(transform.position, WaterRadius, RefilLayer);
         if (hit2D != null)
         {
             // Debug.Log("Refill");
