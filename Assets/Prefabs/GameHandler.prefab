@@ -825,7 +825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UseTaken: 0
-  PrefabObject: {fileID: 52584985418048287, guid: f9f48a426c8df064b8c96d24a03c60d7,
+  PrefabObject: {fileID: 8035368125609976929, guid: f9f48a426c8df064b8c96d24a03c60d7,
     type: 3}
   SpawnTransform:
   - {fileID: 5445449210322024083}

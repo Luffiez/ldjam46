@@ -44,7 +44,7 @@ public class Spawner : MonoBehaviour
     public virtual GameObject Spawn()
     {
         Vector3 spawnPosition = Vector3.zero;
-        int index = Random.Range(0, SpawnPoints.Length);
+        int index = Random.Range(0, SpawnTransform.Length);
         if (UseTaken)
         {
             for (int i = 0; i < SpawnPoints.Length; i++)
