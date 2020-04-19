@@ -42,6 +42,7 @@ public class GameHandler : MonoBehaviour
 
     private void Start()
     {
+        FlowerSpawner.Spawn();
         FlowerSpawnTimer = Time.time + FlowerSpawnTime;
         EnemySpawnTimer = Time.time + EnemySpawnTimer;
         GameOverText.text = "";
@@ -88,7 +89,7 @@ public class GameHandler : MonoBehaviour
         }
         else
         {
-            AmmoText.text = "Refil!";
+            AmmoText.text = "Emtpy!";
         }
     }
 

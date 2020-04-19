@@ -53,7 +53,7 @@ public class WaterCan : MonoBehaviour
         Collider2D hit2D = Physics2D.OverlapCircle(WaterPosition, WaterRadius, RefilLayer);
         if (hit2D != null)
         {
-            Debug.Log("Refil");
+            // Debug.Log("Refill");
             Ammo = MaxAmmo;
             GameHandler.Instance.SetAmmoText(Ammo);
             return;

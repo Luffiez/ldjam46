@@ -53,15 +53,6 @@ public class Flower : MonoBehaviour,IWater
         StartCoroutine(Decay());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            Water();
-
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-            SetOnFire();
-    }
-
     private IEnumerator Decay()
     {
         while (true)

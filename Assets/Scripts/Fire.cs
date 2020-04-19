@@ -52,7 +52,6 @@ public class Fire : MonoBehaviour, IWater
 
             yield return StartCoroutine(path.WaitForPath());
 
-            Debug.Log(flower.name + " : " + curDist);
 
             if (closestTarget == null)
             {               
@@ -61,11 +60,9 @@ public class Fire : MonoBehaviour, IWater
             else if((lastDist >= curDist) || 
                 (currentTarget && currentTarget.IsBurning))
             {
-                Debug.Log("New target!: " + flower.name);
                 lastDist = curDist;
                 closestTarget = flower;
             }
-            //Debug.Log("Target: " + closestTarget.name + " - Length: " + closestLenght);
         }
       
         currentTarget = closestTarget;

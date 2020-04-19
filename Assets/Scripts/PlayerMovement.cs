@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D RBody;
+    Animator anim;
     [SerializeField]
     float Speed;
     [SerializeField]
@@ -14,10 +15,15 @@ public class PlayerMovement : MonoBehaviour
     float WaterTimer;
     Vector2 MoveDirection;
     bool GameOver = false;
+    bool isFacingRight = true;
+    bool isFacingUp = false;
+    [SerializeField]
+    private SpriteRenderer wateringCanSprite;
     // Start is called before the first frame update
     private void Start()
     {
         RBody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
     // Update is called once per frame
@@ -29,7 +35,24 @@ public class PlayerMovement : MonoBehaviour
         if (WaterTimer > Time.time)
         { RBody.velocity = Vector2.zero; }
         else
-        { RBody.velocity = MoveDirection * Speed; }
+        { 
+            RBody.velocity = MoveDirection * Speed; 
+            if(RBody.velocity.x > 0 && !isFacingRight ||
+                RBody.velocity.x < 0 && isFacingRight)
+            {
+                FlipX();
+            }
+            if(RBody.velocity.y > 0 && !isFacingUp ||
+                RBody.velocity.y < 0 && isFacingUp ||
+                RBody.velocity.x != 0 && isFacingUp)
+            {
+                FlipY();
+            }
+        }
+
+        anim.SetFloat("x", RBody.velocity.x);
+        anim.SetFloat("y", RBody.velocity.y);
+
     }
 
     public void GetMovementInput(InputAction.CallbackContext context)
@@ -39,8 +62,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnWater(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
-         WaterTimer = Time.time + WateringTime;
+        if (GameOver)
+            return;
+
+        if (context.phase == InputActionPhase.Performed)
+        {
+            WaterTimer = Time.time + WateringTime;
+            anim.SetTrigger("Water");
+        }
     }
 
     void OnGameOver()
@@ -60,4 +89,20 @@ public class PlayerMovement : MonoBehaviour
         GameHandler.Instance.GameOver.RemoveListener(OnGameOver);
     }
 
+    void FlipX()
+    {
+        isFacingRight = !isFacingRight;
+
+        transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+    }
+
+    void FlipY()
+    {
+        isFacingUp = !isFacingUp;
+        if (isFacingUp)
+            wateringCanSprite.sortingOrder = 3;
+        else
+            wateringCanSprite.sortingOrder = 5;
+
+    }
 }
