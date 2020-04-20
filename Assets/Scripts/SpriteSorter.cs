@@ -18,9 +18,9 @@ public class SpriteSorter : MonoBehaviour
         SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        SpriteRenderer.sortingOrder = (int)(SortingBaseValue - transform.position.y + OriginOffsetY);
+        SpriteRenderer.sortingOrder = 5000 + (int)Camera.main.WorldToScreenPoint(SpriteRenderer.bounds.min).y * -3;
         if (RunOnce)
             Destroy(this);
     }

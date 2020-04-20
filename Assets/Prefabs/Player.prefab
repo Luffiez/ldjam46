@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 386991844}
   - component: {fileID: 386991845}
-  - component: {fileID: 3739850160590878900}
+  - component: {fileID: 1359102989583440433}
   m_Layer: 10
   m_Name: Watering Can
   m_TagString: Untagged
@@ -260,7 +260,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3739850160590878900
+--- !u!114 &1359102989583440433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,12 +269,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 386991843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d56f286c267a2458aabd11ad3eb236, type: 3}
+  m_Script: {fileID: 11500000, guid: cb097147d82c2734eafeea4dbba9a8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SortingBaseValue: 5000
-  OriginOffsetY: 6
-  RunOnce: 0
+  PlayerSpriteRender: {fileID: 24944350}
 --- !u!1 &6027378752978298832
 GameObject:
   m_ObjectHideFlags: 0
@@ -5177,6 +5176,7 @@ MonoBehaviour:
   Speed: 3
   WateringTime: 0.5
   wateringCanSprite: {fileID: 386991845}
+  CanSorter: {fileID: 1359102989583440433}
 --- !u!50 &7305527470092066466
 Rigidbody2D:
   serializedVersion: 4

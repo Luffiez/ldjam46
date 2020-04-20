@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     bool isFacingUp = false;
     [SerializeField]
     private SpriteRenderer wateringCanSprite;
+    [SerializeField]
+    private WaterCanSpriteSorter CanSorter;
     // Start is called before the first frame update
     private void Start()
     {
@@ -40,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             if(RBody.velocity.x > 0 && !isFacingRight ||
                 RBody.velocity.x < 0 && isFacingRight)
             {
-               // FlipX();
+               FlipX();
             }
             if(RBody.velocity.y > 0 && !isFacingUp ||
                 RBody.velocity.y < 0 && isFacingUp ||
@@ -98,11 +100,11 @@ public class PlayerMovement : MonoBehaviour
 
     void FlipY()
     {
-        //isFacingUp = !isFacingUp;
-        //if (isFacingUp)
-        //    wateringCanSprite.sortingOrder = 3;
-        //else
-        //    wateringCanSprite.sortingOrder = 5;
+        isFacingUp = !isFacingUp;
+        if (isFacingUp)
+            CanSorter.RenderBack();
+        else
+            CanSorter.RenderFront();
 
     }
 }
