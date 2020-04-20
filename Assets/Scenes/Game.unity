@@ -19718,6 +19718,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 2064961472}
+    - target: {fileID: 7305527470092066467, guid: a58362df684e09c4d8788706313585d3,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePause
       objectReference: {fileID: 0}
     - target: {fileID: 7305527470092066471, guid: a58362df684e09c4d8788706313585d3,
         type: 3}
