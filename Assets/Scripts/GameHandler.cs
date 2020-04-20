@@ -33,6 +33,8 @@ public class GameHandler : MonoBehaviour
     [SerializeField]
     float EnemySpawnTime;
     float EnemySpawnTimer;
+    [SerializeField]
+    float EnemyMinSpawnTime;
     int EnemiesSpawned = 0;
     [SerializeField]   
     Spawner EnemySpawner;
@@ -117,6 +119,7 @@ public class GameHandler : MonoBehaviour
             EnemySpawner.Spawn();
             EnemiesSpawned++;
             EnemySpawnTime *= 0.99f;
+            EnemySpawnTime = Mathf.Clamp(EnemySpawnTimer,EnemyMinSpawnTime, EnemySpawnTimer);
             EnemySpawnTimer = Time.time + EnemySpawnTime;
         }
     }
