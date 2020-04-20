@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b8ed26d62c0df4588bc850207aa552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 1
+  masterVolume: 0.3
   bgmSource: {fileID: 1646557655}
   sfxSource: {fileID: 83608939}
   menuMusic: {fileID: 8300000, guid: 8fd95a682ca86cc4fac1072c024d29c7, type: 3}

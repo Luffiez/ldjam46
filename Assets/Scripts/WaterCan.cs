@@ -42,11 +42,13 @@ public class WaterCan : MonoBehaviour
     [SerializeField]
     TMP_Text refillText;
 
+    PlayerMovement playerMovement;
+
     private void Start()
     {
+        playerMovement = GetComponent<PlayerMovement>();
         ASource = GetComponent<AudioSource>();
         GameHandler.Instance.SetAmmoText(Ammo);
-        //WaterParticle = WaterParticlePrefab.GetComponent<ParticleSystem>();
         GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
 
@@ -76,7 +78,8 @@ public class WaterCan : MonoBehaviour
             // Debug.Log("Refill");
             Ammo = MaxAmmo;
             ASource.clip = RefilingClip;
-            ASource.volume = MusicManager.Instance.SfxVolume;
+            if (MusicManager.Instance)
+                ASource.volume = MusicManager.Instance.SfxVolume;
             ASource.Play();
             refillText.text = "Refilled!";
             emptyAnim.SetTrigger("Empty");
@@ -86,7 +89,8 @@ public class WaterCan : MonoBehaviour
         }
         if (Ammo <= 0)
         {
-            MusicManager.Instance.PlayOneShot(EmptyClip);
+            if (MusicManager.Instance)
+                MusicManager.Instance.PlayOneShot(EmptyClip);
             refillText.text = "Emtpy";
             emptyAnim.SetTrigger("Empty");
             WaterTimer = Time.time + 0.5f;
@@ -94,10 +98,14 @@ public class WaterCan : MonoBehaviour
         }
         Ammo--;
         ASource.clip = WateringClip;
-        ASource.volume = MusicManager.Instance.SfxVolume;
+        if (MusicManager.Instance)
+            ASource.volume = MusicManager.Instance.SfxVolume;
         ASource.Play();
         GameHandler.Instance.SetAmmoText(Ammo);
-        //WaterParticlePrefab.transform.position = WaterPosition;
+
+        float rotationZ = Mathf.Atan2(ShootDirection.y, ShootDirection.x) * Mathf.Rad2Deg;
+        waterParticles.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+
         waterParticles.Play();
         WaterTimer = Time.time + WateringTime;
         Collider2D [] hits2D = Physics2D.OverlapCircleAll(WaterPosition, WaterRadius,WateringLayer);
