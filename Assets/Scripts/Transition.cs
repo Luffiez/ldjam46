@@ -3,11 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class Transition : MonoBehaviour
 {
+    public static Transition instance;
+
     Animator anim;
     string sceneToLoad = "Menu";
 
     private void Awake()
     {
+        if (instance)
+            Destroy(gameObject);
+        else
+            instance = this;
+
         DontDestroyOnLoad(transform.root);
         anim = GetComponent<Animator>();
     }
