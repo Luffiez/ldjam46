@@ -32,7 +32,9 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     Transform SpawnPointParent;
     SpawnPoint[] SpawnPoints;
-    private void Start()
+
+    
+    private void Awake()
     {
         SpawnPoints = new SpawnPoint[SpawnPointParent.childCount];
         for (int i = 0; i < SpawnPoints.Length; i++)

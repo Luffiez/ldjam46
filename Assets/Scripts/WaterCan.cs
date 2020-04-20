@@ -6,6 +6,7 @@ using TMPro;
 
 public class WaterCan : MonoBehaviour
 { 
+    Vector2 Direction;
     Vector2 ShootDirection;
     [Tooltip("How the size of the radius when watering")]
     [SerializeField]
@@ -41,6 +42,8 @@ public class WaterCan : MonoBehaviour
     private Animator emptyAnim;
     [SerializeField]
     TMP_Text refillText;
+    bool Watering = false;
+    Vector2 WaterPosition = Vector2.zero;
 
     PlayerMovement playerMovement;
 
@@ -52,18 +55,38 @@ public class WaterCan : MonoBehaviour
         GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
 
+    private void FixedUpdate()
+    {
+        if (Watering)
+        {
+            Collider2D[] hits2D = Physics2D.OverlapCircleAll(WaterPosition, WaterRadius, WateringLayer);
+            if (hits2D.Length > 0)
+            {
+                for (int i = 0; i < hits2D.Length; i++)
+                {
+                    IWater iWater = hits2D[i].GetComponent<IWater>();
+                    if (iWater != null)
+                        iWater.Water();
+                }
+            }
+        }
+    }
     private void Update()
     {
         if (WaterTimer < Time.time)
+        {
             ASource.Stop();
+            Watering = false;
+        }
+           
     }
 
     public void GetShotDir(InputAction.CallbackContext context)
     {
         Vector2 tmpVec = context.ReadValue<Vector2>();
-        if (tmpVec == Vector2.zero)
+        if (tmpVec == Vector2.zero )
             return;
-        ShootDirection = tmpVec;
+        Direction = tmpVec;
     }
 
     public void OnWater(InputAction.CallbackContext context )
@@ -71,7 +94,7 @@ public class WaterCan : MonoBehaviour
         
         if ( context.phase == InputActionPhase.Canceled || context.phase == InputActionPhase.Started || WaterTimer > Time.time||GameOver)
             return;
-        Vector2 WaterPosition = (Vector2)transform.position + ShootDirection;
+        WaterPosition = (Vector2)transform.position + Direction;
         Collider2D hit2D = Physics2D.OverlapCircle(transform.position, WaterRadius, RefilLayer);
         if (hit2D != null && Ammo != MaxAmmo)
         {
@@ -102,22 +125,14 @@ public class WaterCan : MonoBehaviour
             ASource.volume = MusicManager.Instance.SfxVolume;
         ASource.Play();
         GameHandler.Instance.SetAmmoText(Ammo);
-
-        float rotationZ = Mathf.Atan2(ShootDirection.y, ShootDirection.x) * Mathf.Rad2Deg;
+       
+        float rotationZ = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
+        Debug.Log(rotationZ);
         waterParticles.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
 
         waterParticles.Play();
         WaterTimer = Time.time + WateringTime;
-        Collider2D [] hits2D = Physics2D.OverlapCircleAll(WaterPosition, WaterRadius,WateringLayer);
-        if (hits2D.Length > 0)
-        {
-            for (int i = 0; i < hits2D.Length; i++)
-            {
-                IWater iWater = hits2D[i].GetComponent<IWater>();
-                if (iWater != null)
-                    iWater.Water();
-            }
-        }
+        Watering = true;
     }
 
     void OnGameOver()

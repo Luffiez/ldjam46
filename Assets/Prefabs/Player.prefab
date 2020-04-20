@@ -5352,7 +5352,7 @@ MonoBehaviour:
   m_text: Empty
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ff332d62403a3444a2bc75e89d6512f, type: 2}
-  m_sharedMaterial: {fileID: 3896499987258664282, guid: 1ff332d62403a3444a2bc75e89d6512f,
+  m_sharedMaterial: {fileID: -33145603841738608, guid: 1ff332d62403a3444a2bc75e89d6512f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10357,7 +10357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d17b102bdb98d747a44a346285713f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 6
   WateringTime: 0.5
   wateringCanSprite: {fileID: 386991845}
   CanSorter: {fileID: 1359102989583440433}

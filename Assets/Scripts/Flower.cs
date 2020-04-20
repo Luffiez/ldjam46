@@ -50,7 +50,8 @@ public class Flower : MonoBehaviour, IWater
     float RefreshAmplifier = 1;
     [SerializeField]
     float BurnAmplifier = 1;
-
+    float WaterTimer = 0;
+    float WaterTime = 0.51f;
     public float CurrentHealth 
     {   get { return currentHealth; }  
         set 
@@ -162,11 +163,15 @@ public class Flower : MonoBehaviour, IWater
 
     public void Water()
     {
+
+        if (WaterTimer > Time.time)
+            return;
+        WaterTimer = Time.time + WaterTime;
+
         float curGain = nourishGain;
         if (IsBurning)
         {
             ExtinguishFire();
-            curGain /= 2;
         }
         AuSource.Stop();
 

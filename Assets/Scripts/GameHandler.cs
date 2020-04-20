@@ -28,10 +28,14 @@ public class GameHandler : MonoBehaviour
     float FlowerSpawnTimer;
     [SerializeField]
     Spawner FlowerSpawner;
+    int FlowersSpawned = 0;
     [Header("Enemy settings")]
     [SerializeField]
     float EnemySpawnTime;
     float EnemySpawnTimer;
+    [SerializeField]
+    float EnemyMinSpawnTime;
+    int EnemiesSpawned = 0;
     [SerializeField]   
     Spawner EnemySpawner;
     public static GameHandler Instance;
@@ -47,7 +51,6 @@ public class GameHandler : MonoBehaviour
     TextMeshProUGUI AmmoText;
     ScoreBoard HighScore;
     string FilePath;
-
     private void Awake()
     {
         if (Instance != null)
@@ -108,11 +111,15 @@ public class GameHandler : MonoBehaviour
         if (FlowerSpawnTimer < Time.time)
         {
             FlowerSpawner.Spawn();
-            FlowerSpawnTimer = Time.time + FlowerSpawnTime;
+            FlowersSpawned++;
+            FlowerSpawnTimer = Time.time + FlowerSpawnTime * FlowersSpawned * 0.95f;
         }
         if (EnemySpawnTimer < Time.time)
         {
             EnemySpawner.Spawn();
+            EnemiesSpawned++;
+            EnemySpawnTime *= 0.99f;
+            EnemySpawnTime = Mathf.Clamp(EnemySpawnTimer,EnemyMinSpawnTime, EnemySpawnTimer);
             EnemySpawnTimer = Time.time + EnemySpawnTime;
         }
     }
@@ -133,6 +140,13 @@ public class GameHandler : MonoBehaviour
         GameOverText.text = "Game Over";
         GameOver.Invoke();
         IsGameOver = true;
+        Invoke("RestartGame", 3f);
+    }
+
+
+    void RestartGame()
+    {
+        Transition.instance.Play();
     }
 
     public void SetAmmoText(int _ammo)

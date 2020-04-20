@@ -246,7 +246,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a9f2b8d79e0b652468d0a2463cc4d6a9, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -5896,7 +5896,7 @@ Grid:
   m_GameObject: {fileID: 461220419}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellGap: {x: -0.01, y: -0.01, z: -0}
   m_CellLayout: 0
   m_CellSwizzle: 0
 --- !u!4 &461220421

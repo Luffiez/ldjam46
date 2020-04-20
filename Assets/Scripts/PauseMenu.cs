@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
 
     bool isPaused = false;
 
-    private void Start()
+    private void Awake()
     {
         cg = GetComponent<CanvasGroup>();
     }
@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
         MusicManager.Instance.PauseSfx(true);
         Time.timeScale = 0;
@@ -50,5 +50,6 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         Transition.instance.Menu();
+        
     }
 }
