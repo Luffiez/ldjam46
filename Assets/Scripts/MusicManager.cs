@@ -2,16 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
 
     public static MusicManager Instance;
     [SerializeField]
-    float Volume;
-    AudioSource ASource;
+    [Range(0f,1f)]
+    float masterVolume = 1;
+    float bgmVolume = 0.1f;
+    float sfxVolume = 0.3f;
+    [SerializeField]
+    AudioSource bgmSource;
+    [SerializeField]
+    AudioSource sfxSource;
+
+    public AudioClip menuMusic;
+    public AudioClip gameMusic;
+
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -24,40 +34,55 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
-        ASource = GetComponent<AudioSource>();
-        if (ASource.clip != null)
-            ASource.Play();
-        ASource.volume = Volume;
+        bgmVolume *= masterVolume;
+        sfxVolume *=  masterVolume;
+
+        bgmSource.volume = bgmVolume; 
+        sfxSource.volume = sfxVolume;
+
+        if (bgmSource.clip != null)
+            bgmSource.Play();
+
+        bgmSource.volume = masterVolume;
+    }
+
+    public void ChangeBgmSong(AudioClip clip)
+    {
+        Debug.Log("Play: " + clip.name);
+        bgmSource.clip = clip;
+        bgmSource.Play();
     }
 
 
-    public void ChangeSong(AudioClip clip)
+    public void ChangeBgmVolume(float volume)
     {
-        ASource.clip = clip;
-        ASource.Play();
+        bgmVolume = volume * masterVolume;
+        bgmSource.volume = bgmVolume;
     }
 
-
-    public void ChangeVolume(float volume)
+    public void ChangeSfxVolume(float volume)
     {
-        ASource.volume = volume;
+        sfxVolume = volume * masterVolume;
+        sfxSource.volume = sfxVolume;
+    }
+
+    public void ChangeMasterVolume(float volume)
+    {
+        masterVolume= volume;
     }
 
     public void StartMusic()
     {
-        ASource.Play();
+        bgmSource.Play();
     }
 
     public void StopMusic()
     {
-        ASource.Stop();
+        bgmSource.Stop();
     }
-
 
     public void PlayOneShot(AudioClip clip, float volume)
     {
-        ASource.PlayOneShot(clip, volume);
+        sfxSource.PlayOneShot(clip, volume);
     }
-    // Start is called before the first frame update
-
 }

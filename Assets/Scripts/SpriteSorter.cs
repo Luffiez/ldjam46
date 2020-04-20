@@ -11,6 +11,7 @@ public class SpriteSorter : MonoBehaviour
     int OriginOffsetY;
     [SerializeField]
     bool RunOnce = false;
+
     // Start is called before the first frame update
     private Renderer SpriteRenderer;
     void Start()

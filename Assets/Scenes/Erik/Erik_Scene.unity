@@ -253,6 +253,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &570404813 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 386991845, guid: a58362df684e09c4d8788706313585d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5966924257216078986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &723247937
 GameObject:
   m_ObjectHideFlags: 0
@@ -14859,6 +14865,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3739850160590878900, guid: a58362df684e09c4d8788706313585d3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7305527470092066471, guid: a58362df684e09c4d8788706313585d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14914,6 +14925,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7305527470092066476, guid: a58362df684e09c4d8788706313585d3,
+        type: 3}
+      propertyPath: playerSprite
+      value: 
+      objectReference: {fileID: 570404813}
     - target: {fileID: 7305527470092066477, guid: a58362df684e09c4d8788706313585d3,
         type: 3}
       propertyPath: m_Name
