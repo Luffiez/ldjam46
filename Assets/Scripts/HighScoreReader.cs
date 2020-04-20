@@ -34,7 +34,7 @@ public class HighScoreReader : MonoBehaviour
             HighScore = JsonUtility.FromJson<ScoreBoard>(jsonString);
         }
 
-        for (int i = 0; i < HighScore.ScoreList.Count; i++)
+        for (int i = HighScore.ScoreList.Count-1; i >= 0; i--)
         {
             GameObject textObject = Instantiate(TextPrefab, PanelTransform);
             TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
@@ -46,15 +46,15 @@ public class HighScoreReader : MonoBehaviour
     {
         switch (id)
         {
-            case 0:
+            case 4:
                 return "- First Place -";
-            case 1:
+            case 3:
                 return "- Second Place -";
             case 2:
                 return "- Third Place -";
-            case 3:
+            case 1:
                 return "- Fourth Place -";
-            case 4:
+            case 0:
                 return "- Fifth Place -";
             default: 
                 return "- First Place -";
