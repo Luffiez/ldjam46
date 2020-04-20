@@ -425,7 +425,7 @@ MonoBehaviour:
   bgmSource: {fileID: 1646557655}
   sfxSource: {fileID: 83608939}
   menuMusic: {fileID: 8300000, guid: d32eff0cf4a81a747912c31c2c7de475, type: 3}
-  gameMusic: {fileID: 8300000, guid: 31f573cbe4fc12f4787760e6afb15d84, type: 3}
+  gameMusic: {fileID: 8300000, guid: d4708efed990ad849823b21a2cfc9301, type: 3}
 --- !u!4 &114941152
 Transform:
   m_ObjectHideFlags: 0
