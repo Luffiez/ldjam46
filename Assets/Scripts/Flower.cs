@@ -163,7 +163,6 @@ public class Flower : MonoBehaviour, IWater
         if (IsBurning)
         {
             ExtinguishFire();
-            curGain /= 2;
         }
         AuSource.Stop();
 
