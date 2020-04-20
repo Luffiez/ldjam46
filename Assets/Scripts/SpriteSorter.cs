@@ -11,6 +11,7 @@ public class SpriteSorter : MonoBehaviour
     int OriginOffsetY;
     [SerializeField]
     bool RunOnce = false;
+
     // Start is called before the first frame update
     private Renderer SpriteRenderer;
     void Start()
@@ -20,8 +21,8 @@ public class SpriteSorter : MonoBehaviour
 
     private void LateUpdate()
     {
-        Debug.Log(  gameObject + " " + (int)( SortingBaseValue - transform.position.y - OriginOffsetY) + "position:" + transform.position);
-        SpriteRenderer.sortingOrder = (int)(SortingBaseValue - transform.position.y - OriginOffsetY);
+        //Debug.Log(  gameObject + " " + (int)( SortingBaseValue - transform.position.y - OriginOffsetY) + "position:" + transform.position);
+        SpriteRenderer.sortingOrder = 5000 + (int)Camera.main.WorldToScreenPoint(SpriteRenderer.bounds.min).y * -3;
         if (RunOnce)
             Destroy(this);
     }
