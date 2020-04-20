@@ -8,6 +8,8 @@ public class Flower : MonoBehaviour, IWater
     [SerializeField] private int maxHealth;
     private float currentHealth;
     [SerializeField] private Image healthImage;
+    [SerializeField]
+    private Animator heathWarningAnim;
 
     [Header("Decay Settings")]
     [Tooltip("The tick-rate for decay in seconds.")]
@@ -105,6 +107,7 @@ public class Flower : MonoBehaviour, IWater
 
     void Die()
     {
+        healthImage.transform.parent.gameObject.SetActive(false);
         if (IsBurning)
         {
             Debug.Log($"Game Over. {gameObject.name} was set ablaze!");
@@ -119,7 +122,7 @@ public class Flower : MonoBehaviour, IWater
     private void UpdateHealthBar()
     {
         float percentage = CurrentHealth / maxHealth;
-
+        heathWarningAnim.SetFloat("Health", percentage);
         healthImage.fillAmount = percentage;
     }
 

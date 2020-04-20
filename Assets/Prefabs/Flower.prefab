@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   healthImage: {fileID: 1922317116979289344}
+  heathWarningAnim: {fileID: 5717660118837830002}
   decayRate: 0.5
   decayStrength: 0.2
   nourishGain: 5
@@ -5369,6 +5370,7 @@ GameObject:
   - component: {fileID: 1922317117397860420}
   - component: {fileID: 1922317117397860421}
   - component: {fileID: 1922317117397860422}
+  - component: {fileID: 5717660118837830002}
   m_Layer: 11
   m_Name: Flower Canvas
   m_TagString: Untagged
@@ -5456,6 +5458,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &5717660118837830002
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922317117397860792}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ad152d4fb57462341ae249b01b20724b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1922317117554071761
 GameObject:
   m_ObjectHideFlags: 0
