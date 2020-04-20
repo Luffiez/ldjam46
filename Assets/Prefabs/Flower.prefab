@@ -69,6 +69,9 @@ MonoBehaviour:
   Burning: {fileID: 8300000, guid: ba5ee7150db1b8644b41e61762936ea4, type: 3}
   RefreshingSound: {fileID: 8300000, guid: cad90932873dad34aad806bb03b88e7a, type: 3}
   Ignite: {fileID: 8300000, guid: f2c5e9fed09ff0b479a67497e7152f4d, type: 3}
+  IgniteAplifier: 2
+  RefreshAmplifier: 2
+  BurnAmplifier: 2
 --- !u!58 &1380801336
 CircleCollider2D:
   m_ObjectHideFlags: 0
