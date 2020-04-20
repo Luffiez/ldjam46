@@ -119,7 +119,7 @@ public class GameHandler : MonoBehaviour
             EnemySpawner.Spawn();
             EnemiesSpawned++;
             EnemySpawnTime *= 0.99f;
-            EnemySpawnTime = Mathf.Clamp(EnemySpawnTimer,EnemyMinSpawnTime, EnemySpawnTimer);
+            EnemySpawnTime = Mathf.Clamp(EnemySpawnTime,EnemyMinSpawnTime, EnemySpawnTime);
             EnemySpawnTimer = Time.time + EnemySpawnTime;
         }
     }

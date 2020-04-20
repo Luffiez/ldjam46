@@ -474,9 +474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680c98caae16fa6428b82a89c8a6306a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlowerSpawnTime: 15
+  FlowerSpawnTime: 20
   FlowerSpawner: {fileID: 575986503770869786}
-  EnemySpawnTime: 6
+  EnemySpawnTime: 10
   EnemyMinSpawnTime: 0.3
   EnemySpawner: {fileID: 575986503770869787}
   GameOver:
