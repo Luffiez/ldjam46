@@ -18,6 +18,7 @@ public class MusicManager : MonoBehaviour
 
     public AudioClip menuMusic;
     public AudioClip gameMusic;
+    public AudioClip menuClickClip;
 
     public float BgmVolume { get { return bgmVolume * masterVolume; } private set => bgmVolume = value; }
     public float SfxVolume { get { return sfxVolume * masterVolume; } private set => sfxVolume = value; }
@@ -25,9 +26,9 @@ public class MusicManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        if (Instance != null && Instance != this)
+        if (Instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
@@ -86,6 +87,10 @@ public class MusicManager : MonoBehaviour
         bgmSource.Stop();
     }
 
+    public void PlayMenuButton()
+    {
+        sfxSource.PlayOneShot(menuClickClip);
+    }
 
     /// <summary>
     /// 

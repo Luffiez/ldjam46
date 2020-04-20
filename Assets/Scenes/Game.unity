@@ -14443,6 +14443,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 5506863962492329099, guid: a9076ebaecfedcb4cb361a86d3a79496,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506863962492329102, guid: a9076ebaecfedcb4cb361a86d3a79496,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9076ebaecfedcb4cb361a86d3a79496, type: 3}
 --- !u!1001 &5966924257216078986
