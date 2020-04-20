@@ -5166,8 +5166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SortingBaseValue: 5000
-  OriginOffsetY: 9
-  RunOnce: 0
+  PlayerSpriteRender: {fileID: 24944350}
 --- !u!1 &697081487
 GameObject:
   m_ObjectHideFlags: 0
@@ -10373,7 +10372,7 @@ MonoBehaviour:
   Speed: 3
   WateringTime: 0.5
   wateringCanSprite: {fileID: 386991845}
-  playerSprite: {fileID: 386991845}
+  CanSorter: {fileID: 1359102989583440433}
 --- !u!50 &7305527470092066466
 Rigidbody2D:
   serializedVersion: 4
