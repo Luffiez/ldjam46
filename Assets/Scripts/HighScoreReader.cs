@@ -48,15 +48,15 @@ public class HighScoreReader : MonoBehaviour
     {
         switch (id)
         {
-            case 4:
+            case 0:
                 return "- First Place -";
-            case 3:
+            case 1:
                 return "- Second Place -";
             case 2:
                 return "- Third Place -";
-            case 1:
+            case 3:
                 return "- Fourth Place -";
-            case 0:
+            case 4:
                 return "- Fifth Place -";
             default: 
                 return "- First Place -";

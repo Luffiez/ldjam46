@@ -11,7 +11,7 @@ public class Transition : MonoBehaviour
     private void Awake()
     {
         if (instance)
-            Destroy(gameObject);
+            Destroy(transform.root.gameObject);
         else
             instance = this;
 
@@ -60,5 +60,10 @@ public class Transition : MonoBehaviour
             SceneManager.LoadScene(sceneToLoad);
         else
             Debug.LogWarning("sceneToLoad has not been specified!");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
