@@ -34,11 +34,30 @@ public class HighScoreReader : MonoBehaviour
             HighScore = JsonUtility.FromJson<ScoreBoard>(jsonString);
         }
 
-        for (int i = HighScore.ScoreList.Count - 1; i >= 0; i--)
+        for (int i = 0; i < HighScore.ScoreList.Count; i++)
         {
             GameObject textObject = Instantiate(TextPrefab, PanelTransform);
             TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
-            text.text = "Score:" + HighScore.ScoreList[i].score + " Date:" + HighScore.ScoreList[i].date;
+            text.text = $"{GetPlacementName(i)} \nScore: {HighScore.ScoreList[i].score} \nDate: {HighScore.ScoreList[i].date}";
+        }
+    }
+
+    string GetPlacementName(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                return "- First Place -";
+            case 1:
+                return "- Second Place -";
+            case 2:
+                return "- Third Place -";
+            case 3:
+                return "- Fourth Place -";
+            case 4:
+                return "- Fifth Place -";
+            default: 
+                return "- First Place -";
         }
     }
 
