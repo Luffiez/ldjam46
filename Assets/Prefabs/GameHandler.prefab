@@ -747,7 +747,7 @@ MonoBehaviour:
   UseTaken: 0
   PrefabObject: {fileID: 8035368125609976929, guid: f9f48a426c8df064b8c96d24a03c60d7,
     type: 3}
-  SpawnPointParent: {fileID: 0}
+  SpawnPointParent: {fileID: 575986502821408999}
 --- !u!114 &575986503770869786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,7 +763,9 @@ MonoBehaviour:
   UseTaken: 1
   PrefabObject: {fileID: 1922317116433197094, guid: e887785baf6ea03459f4ac09149f587e,
     type: 3}
-  SpawnPointParent: {fileID: 0}
+  SpawnPointParent: {fileID: 575986503602659215}
+  spawnParticles: {fileID: 7926070252571140318, guid: 36165539ad5165c46bbcbba21e80e89a,
+    type: 3}
 --- !u!1 &885136687008239697
 GameObject:
   m_ObjectHideFlags: 0
