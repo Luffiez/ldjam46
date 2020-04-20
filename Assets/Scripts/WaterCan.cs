@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Events;
+using TMPro;
 
 public class WaterCan : MonoBehaviour
 { 
@@ -25,8 +25,9 @@ public class WaterCan : MonoBehaviour
     [SerializeField]
     LayerMask RefilLayer;
     [SerializeField]
-    GameObject WaterParticlePrefab;
-    ParticleSystem WaterParticle;
+    ParticleSystem waterParticles;
+    //GameObject WaterParticlePrefab;
+    //ParticleSystem WaterParticle;
     bool GameOver = false;
     [Header("Audio")]
     [SerializeField]
@@ -38,12 +39,14 @@ public class WaterCan : MonoBehaviour
     AudioSource ASource;
     [SerializeField]
     private Animator emptyAnim;
+    [SerializeField]
+    TMP_Text refillText;
 
     private void Start()
     {
         ASource = GetComponent<AudioSource>();
         GameHandler.Instance.SetAmmoText(Ammo);
-        WaterParticle = WaterParticlePrefab.GetComponent<ParticleSystem>();
+        //WaterParticle = WaterParticlePrefab.GetComponent<ParticleSystem>();
         GameHandler.Instance.GameOver.AddListener(OnGameOver);
     }
 
@@ -68,13 +71,15 @@ public class WaterCan : MonoBehaviour
             return;
         Vector2 WaterPosition = (Vector2)transform.position + ShootDirection;
         Collider2D hit2D = Physics2D.OverlapCircle(transform.position, WaterRadius, RefilLayer);
-        if (hit2D != null)
+        if (hit2D != null && Ammo != MaxAmmo)
         {
             // Debug.Log("Refill");
             Ammo = MaxAmmo;
             ASource.clip = RefilingClip;
             ASource.volume = MusicManager.Instance.SfxVolume;
             ASource.Play();
+            refillText.text = "Refilled!";
+            emptyAnim.SetTrigger("Empty");
             GameHandler.Instance.SetAmmoText(Ammo);
             WaterTimer = Time.time + WateringTime;
             return;
@@ -82,6 +87,7 @@ public class WaterCan : MonoBehaviour
         if (Ammo <= 0)
         {
             MusicManager.Instance.PlayOneShot(EmptyClip);
+            refillText.text = "Emtpy";
             emptyAnim.SetTrigger("Empty");
             WaterTimer = Time.time + 0.5f;
             return;
@@ -91,8 +97,8 @@ public class WaterCan : MonoBehaviour
         ASource.volume = MusicManager.Instance.SfxVolume;
         ASource.Play();
         GameHandler.Instance.SetAmmoText(Ammo);
-        WaterParticlePrefab.transform.position = WaterPosition;
-        WaterParticle.Play();
+        //WaterParticlePrefab.transform.position = WaterPosition;
+        waterParticles.Play();
         WaterTimer = Time.time + WateringTime;
         Collider2D [] hits2D = Physics2D.OverlapCircleAll(WaterPosition, WaterRadius,WateringLayer);
         if (hits2D.Length > 0)
