@@ -57,14 +57,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void LateUpdate()
-    {
-        if(!GameOver)
-        {
-            UpdateY();
-        }
-    }
-
     public void GetMovementInput(InputAction.CallbackContext context)
     {
         MoveDirection = context.ReadValue<Vector2>();
