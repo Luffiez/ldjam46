@@ -74,7 +74,7 @@ public class GameHandler : MonoBehaviour
 
     private void Start()
     {
-        FilePath = Application.dataPath + "/score.txt";
+        FilePath = Application.persistentDataPath + "/score.txt";
         FlowerSpawner.Spawn();
         FlowerSpawnTimer = Time.time + FlowerSpawnTime;
         EnemySpawnTimer = Time.time + EnemySpawnTimer;

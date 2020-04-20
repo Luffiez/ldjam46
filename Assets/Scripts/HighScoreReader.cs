@@ -13,7 +13,7 @@ public class HighScoreReader : MonoBehaviour
     string FilePath;
     void Start()
     {
-        FilePath = Application.dataPath + "/score.txt";
+        FilePath = Application.persistentDataPath + "/score.txt";
         string jsonString;
         if (!File.Exists(FilePath))
         {
