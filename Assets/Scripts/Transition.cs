@@ -7,6 +7,8 @@ public class Transition : MonoBehaviour
 
     Animator anim;
     string sceneToLoad = "Menu";
+    [SerializeField]
+    AudioClip ClickSound;
 
     private void Awake()
     {
@@ -44,12 +46,14 @@ public class Transition : MonoBehaviour
 
     public void Play()
     {
+        MusicManager.Instance.PlayOneShot(ClickSound,2);
         sceneToLoad = "Game";
         anim.SetBool("TransitionTo", true);
     }
 
     public void Menu()
     {
+        MusicManager.Instance.PlayOneShot(ClickSound,2);
         sceneToLoad = "Menu";
         anim.SetBool("TransitionTo", true);
     }
@@ -64,6 +68,7 @@ public class Transition : MonoBehaviour
 
     public void Quit()
     {
+        MusicManager.Instance.PlayOneShot(ClickSound,2);
         Application.Quit();
     }
 }
