@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1922317116433197092}
   - component: {fileID: 1922317116433197093}
   - component: {fileID: 1380801336}
-  - component: {fileID: 1380801337}
+  - component: {fileID: 9052398334750892741}
   m_Layer: 11
   m_Name: Flower
   m_TagString: Untagged
@@ -85,7 +85,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!82 &1380801337
+--- !u!82 &9052398334750892741
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

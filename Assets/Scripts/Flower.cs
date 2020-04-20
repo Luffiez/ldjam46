@@ -74,6 +74,7 @@ public class Flower : MonoBehaviour, IWater
             {
                 if (!AuSource.isPlaying)
                 {
+                    AuSource.volume = MusicManager.Instance.SfxVolume;
                     AuSource.Play();
                 }
                 amount *= decayMultiplier;
@@ -139,8 +140,8 @@ public class Flower : MonoBehaviour, IWater
     {
         IsBurning = true;
         fireParticles.Play();
-        AuSource.PlayOneShot(Ignite);
-            }
+        MusicManager.Instance.PlayOneShot(Ignite);
+    }
 
     private void ExtinguishFire()
     {
@@ -157,7 +158,8 @@ public class Flower : MonoBehaviour, IWater
             curGain /= 2;
         }
         AuSource.Stop();
-        AuSource.PlayOneShot(RefreshingSound);
+
+        MusicManager.Instance.PlayOneShot(RefreshingSound);
 
         CurrentHealth += curGain;
         if (CurrentHealth >= maxHealth)

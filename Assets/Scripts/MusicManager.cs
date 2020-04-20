@@ -19,6 +19,9 @@ public class MusicManager : MonoBehaviour
     public AudioClip menuMusic;
     public AudioClip gameMusic;
 
+    public float BgmVolume { get { return bgmVolume * masterVolume; } private set => bgmVolume = value; }
+    public float SfxVolume { get { return sfxVolume * masterVolume; } private set => sfxVolume = value; }
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -34,11 +37,8 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
-        bgmVolume *= masterVolume;
-        sfxVolume *=  masterVolume;
-
-        bgmSource.volume = bgmVolume; 
-        sfxSource.volume = sfxVolume;
+        bgmSource.volume = BgmVolume; 
+        sfxSource.volume = SfxVolume;
 
         if (bgmSource.clip != null)
             bgmSource.Play();
@@ -48,22 +48,27 @@ public class MusicManager : MonoBehaviour
 
     public void ChangeBgmSong(AudioClip clip)
     {
-        Debug.Log("Play: " + clip.name);
         bgmSource.clip = clip;
         bgmSource.Play();
     }
 
+    public void PauseSfx(bool pause)
+    {
+        if (pause)
+            sfxSource.Pause();
+        else
+            sfxSource.Play();
+    }
 
     public void ChangeBgmVolume(float volume)
     {
-        bgmVolume = volume * masterVolume;
-        bgmSource.volume = bgmVolume;
+        BgmVolume = volume * masterVolume;
+        bgmSource.volume = BgmVolume;
     }
 
     public void ChangeSfxVolume(float volume)
     {
-        sfxVolume = volume * masterVolume;
-        sfxSource.volume = sfxVolume;
+        sfxSource.volume = SfxVolume;
     }
 
     public void ChangeMasterVolume(float volume)
@@ -81,8 +86,14 @@ public class MusicManager : MonoBehaviour
         bgmSource.Stop();
     }
 
-    public void PlayOneShot(AudioClip clip, float volume)
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="clip">The audioclip to play</param>
+    /// <param name="volumeModifier">Modifier for normal sfx volume. 0f - 1f</param>
+    public void PlayOneShot(AudioClip clip, float volumeModifier = 1f)
     {
-        sfxSource.PlayOneShot(clip, volume);
+        sfxSource.PlayOneShot(clip, SfxVolume * volumeModifier);
     }
 }
