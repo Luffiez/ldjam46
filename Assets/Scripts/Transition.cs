@@ -32,7 +32,6 @@ public class Transition : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         anim.SetBool("TransitionTo", false);
-        Debug.Log("Loaded scene!");
         if(SceneManager.GetActiveScene().name == "Game")
         {
             MusicManager.Instance.ChangeBgmSong(MusicManager.Instance.gameMusic);
