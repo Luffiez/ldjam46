@@ -9,10 +9,16 @@ using System.IO;
 [System.Serializable]
 public class ScoreBoard
 {//add date later
-   public List<int> Scores;
+   public List<Score> ScoreList;
 
 }
 
+[System.Serializable]
+public class Score
+{
+    public int score;
+    public string date;
+}
 public class GameHandler : MonoBehaviour
 {
    
@@ -34,7 +40,7 @@ public class GameHandler : MonoBehaviour
     [Header("UI")]
     [SerializeField]
     TextMeshProUGUI GameOverText;
-    int Score = 0;
+    int Points = 0;
     [SerializeField]
     TextMeshProUGUI ScoreText;
     [SerializeField]
@@ -52,8 +58,11 @@ public class GameHandler : MonoBehaviour
     string CreateNewScoreFile(string filePath)
     {
         ScoreBoard scoreBoard = new ScoreBoard();
-        scoreBoard.Scores = new List<int>();
-        scoreBoard.Scores.Add(1000);
+        scoreBoard.ScoreList = new List<Score>();
+        Score score = new Score();
+        score.score = 1000;
+        score.date = System.DateTime.Today.ToString("dd / MM / yyyy");
+        scoreBoard.ScoreList.Add(score);
         string jsonString = JsonUtility.ToJson(scoreBoard);
         StreamWriter writer = new StreamWriter(File.Create(filePath));
         writer.Write(jsonString);
@@ -112,8 +121,8 @@ public class GameHandler : MonoBehaviour
     {
         if (IsGameOver)
             return;
-        Score += _points;
-        ScoreText.text = "Score:" + Score;
+        Points += _points;
+        ScoreText.text = "Score:" + Points;
     }
 
     public void StartGameOver()
@@ -140,11 +149,15 @@ public class GameHandler : MonoBehaviour
 
     void UpdateScoreBoard()
     {
-        HighScore.Scores.Add(Score);
-        HighScore.Scores.Sort();
-        while (HighScore.Scores.Count > 5)
+        Score score = new Score();
+        score.score = Points;
+        score.date = System.DateTime.Today.ToString("dd / MM / yyyy");
+
+        HighScore.ScoreList.Add(score);
+        HighScore.ScoreList.Sort((a,b)=> a.score.CompareTo(b.score));
+        while (HighScore.ScoreList.Count > 5)
         {
-            HighScore.Scores.RemoveAt(0);
+            HighScore.ScoreList.RemoveAt(0);
         }
         string jsonString = JsonUtility.ToJson(HighScore);
         StreamWriter writer = new StreamWriter(FilePath);
