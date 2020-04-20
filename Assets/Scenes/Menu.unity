@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 217496852}
   - component: {fileID: 217496851}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Ambient Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5639,8 +5639,8 @@ MonoBehaviour:
     Sounds -\r\n13-1 Watering, kettle\r\nby 16GPanskaKomarkova_Marina @freesound.org\r\r\n\r\nGoblin
     Death \r\nby spookymodem @skirmish.io\r\n\r\nCatching fire \r\nby themightyglider
     @skirmish.io\r\n\r\n Liquid Fill Glass\r\n by junkfood2121 @freesound.org\r\n\r\nrefreshing
-    noise\r\n by guichegancas @freesound.org\r\n \r\n Stab, Metal Knife in Lettuce\r\n
-    by InspectorJ @freesound.org"
+    noise\r\n by guichegancas @freesound.org\r\n \r\n Stab, Metal Knife in Lettuce\r\nby
+    InspectorJ @freesound.org"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ff332d62403a3444a2bc75e89d6512f, type: 2}
   m_sharedMaterial: {fileID: -33145603841738608, guid: 1ff332d62403a3444a2bc75e89d6512f,
@@ -5710,9 +5710,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 271166275}
-    characterCount: 493
+    characterCount: 492
     spriteCount: 0
-    spaceCount: 75
+    spaceCount: 74
     wordCount: 69
     linkCount: 0
     lineCount: 33
