@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f18aebf583f5243aafb6ae29f0f7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickSound: {fileID: 8300000, guid: 1707eaf435a4bf241bd9a13f460282df, type: 3}
 --- !u!1 &78255898
 GameObject:
   m_ObjectHideFlags: 0
@@ -9910,6 +9911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hsPanel: {fileID: 127169298}
   creditsPanel: {fileID: 884155118}
+  ClickSound: {fileID: 8300000, guid: 1707eaf435a4bf241bd9a13f460282df, type: 3}
 --- !u!1 &1278486112
 GameObject:
   m_ObjectHideFlags: 0

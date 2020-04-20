@@ -6,7 +6,8 @@ public class HsCreditPanel : MonoBehaviour
 {
     Animator anim;
     public GameObject hsPanel, creditsPanel;
-
+    [SerializeField]
+    AudioClip ClickSound;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -14,6 +15,7 @@ public class HsCreditPanel : MonoBehaviour
 
     public void ShowHighscore()
     {
+        MusicManager.Instance.PlayOneShot(ClickSound, 2);
         if(hsPanel.activeSelf)
             hsPanel.SetActive(false);
         else
@@ -28,7 +30,8 @@ public class HsCreditPanel : MonoBehaviour
 
     public void ShowCredits()
     {
-        if(creditsPanel.activeSelf)
+        MusicManager.Instance.PlayOneShot(ClickSound, 2);
+        if (creditsPanel.activeSelf)
             creditsPanel.SetActive(false);
         else
             creditsPanel.SetActive(true);
