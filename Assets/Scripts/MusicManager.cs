@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
     [Range(0f,1f)]
     float masterVolume = 1;
     float bgmVolume = 0.1f;
-    float sfxVolume = 0.3f;
+    float sfxVolume = 0.6f;
     [SerializeField]
     AudioSource bgmSource;
     [SerializeField]

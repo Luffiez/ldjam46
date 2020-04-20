@@ -30,21 +30,21 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     GameObject PrefabObject;
     [SerializeField]
-    Transform[] SpawnTransform;
+    Transform SpawnPointParent;
     SpawnPoint[] SpawnPoints;
     private void Start()
     {
-        SpawnPoints = new SpawnPoint[SpawnTransform.Length];
-        for (int i = 0; i < SpawnTransform.Length; i++)
+        SpawnPoints = new SpawnPoint[SpawnPointParent.childCount];
+        for (int i = 0; i < SpawnPoints.Length; i++)
         {
-            SpawnPoints[i] = new SpawnPoint(SpawnTransform[i].position, false);
+            SpawnPoints[i] = new SpawnPoint(SpawnPointParent.GetChild(i).position, false);
         }
     }
 
     public virtual GameObject Spawn()
     {
         Vector3 spawnPosition = Vector3.zero;
-        int index = Random.Range(0, SpawnTransform.Length);
+        int index = Random.Range(0, SpawnPoints.Length);
         if (UseTaken)
         {
             for (int i = 0; i < SpawnPoints.Length; i++)

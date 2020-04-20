@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &437973039 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 575986502821408999, guid: a9076ebaecfedcb4cb361a86d3a79496,
+    type: 3}
+  m_PrefabInstance: {fileID: 5506863961978198695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &461220419
 GameObject:
   m_ObjectHideFlags: 0
@@ -3903,6 +3909,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1210498656 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 575986503602659215, guid: a9076ebaecfedcb4cb361a86d3a79496,
+    type: 3}
+  m_PrefabInstance: {fileID: 5506863961978198695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!213 &1864442919
 Sprite:
   m_ObjectHideFlags: 0
@@ -13807,6 +13819,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 575986502491531318, guid: a9076ebaecfedcb4cb361a86d3a79496,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 575986503770869785, guid: a9076ebaecfedcb4cb361a86d3a79496,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13862,6 +13879,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 575986503770869786, guid: a9076ebaecfedcb4cb361a86d3a79496,
+        type: 3}
+      propertyPath: SpawnPointParent
+      value: 
+      objectReference: {fileID: 1210498656}
+    - target: {fileID: 575986503770869787, guid: a9076ebaecfedcb4cb361a86d3a79496,
+        type: 3}
+      propertyPath: SpawnPointParent
+      value: 
+      objectReference: {fileID: 437973039}
     - target: {fileID: 575986503770869791, guid: a9076ebaecfedcb4cb361a86d3a79496,
         type: 3}
       propertyPath: m_Name
