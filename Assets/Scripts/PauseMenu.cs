@@ -48,6 +48,7 @@ public class PauseMenu : MonoBehaviour
     
     public void ReturnToMenu()
     {
+        Time.timeScale = 1;
         Transition.instance.Menu();
     }
 }
